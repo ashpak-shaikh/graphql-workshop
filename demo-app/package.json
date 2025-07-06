@@ -1,0 +1,19 @@
+{
+  "name": "graphql-demo-app",
+  "version": "1.0.0",
+  "description": "Demo application showcasing GraphQL concepts",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "apollo-server": "^3.10.2",
+    "graphql": "^16.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

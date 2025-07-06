@@ -1,0 +1,60 @@
+# Movie type definition
+type Movie {
+  id: ID!
+  title: String!
+  director: String!
+  releaseYear: Int!
+  genre: String!
+  duration: Int!
+  rating: Float!
+  reviews: [Review!]!
+}
+
+# Review type definition
+type Review {
+  id: ID!
+  movieId: ID!
+  rating: Int!
+  comment: String
+  reviewer: String!
+  createdAt: String!
+}
+
+# Input type for creating a movie
+input MovieInput {
+  title: String!
+  director: String!
+  releaseYear: Int!
+  genre: String!
+  duration: Int!
+  rating: Float!
+}
+
+# Input type for creating a review
+input ReviewInput {
+  movieId: ID!
+  rating: Int!
+  comment: String
+  reviewer: String!
+}
+
+# Query type with operations
+type Query {
+  movies: [Movie!]!
+  movie(id: ID!): Movie
+  moviesByGenre(genre: String!): [Movie!]!
+  moviesByYear(year: Int!): [Movie!]!
+  topRatedMovies(limit: Int = 10): [Movie!]!
+  recentMovies(limit: Int = 10): [Movie!]!
+  searchMovies(query: String!): [Movie!]!
+}
+
+# Mutation type with operations
+type Mutation {
+  addMovie(movie: MovieInput!): Movie
+  updateMovie(id: ID!, movie: MovieInput!): Movie
+  deleteMovie(id: ID!): Boolean
+  addReview(review: ReviewInput!): Review
+  updateReview(id: ID!, review: ReviewInput!): Review
+  deleteReview(id: ID!): Boolean
+}
