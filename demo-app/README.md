@@ -1,6 +1,6 @@
-# GraphQL vs REST Demo App
+# GraphQL Demo App
 
-This demo application showcases the core concepts of GraphQL and demonstrates the differences between REST and GraphQL APIs.
+This demo application showcases the core concepts of GraphQL using a movies database.
 
 ## Setup
 
@@ -16,75 +16,124 @@ npm start
 
 The server will start on `http://localhost:4000` with GraphiQL interface available at the same URL.
 
-## GraphQL vs REST Comparison
+## Features Demonstrated
 
-### REST Approach
-To get book details in REST, you would need:
-- One endpoint to get all books: `GET /books`
-- Another endpoint to get a specific book: `GET /books/:id`
-- Another endpoint to create a book: `POST /books`
+1. **Data Fetching**
+   - Query movies with nested relationships (reviews)
+   - Filter movies by genre, year, rating
+   - Search movies by title, director, or genre
+   - Paginate results
+   - Sort movies by rating or release year
 
-### GraphQL Approach
-With GraphQL, you have a single endpoint `/graphql` that can handle all these operations:
+2. **Mutations**
+   - Add new movies
+   - Update existing movies
+   - Delete movies
+   - Add reviews to movies
+   - Update reviews
+   - Delete reviews
 
-#### Query Examples
+3. **Schema Features**
+   - Input types for mutations
+   - Type validation
+   - Custom scalars
+   - Aliases and fragments
+   - Error handling
 
-1. Get all books:
+## Query Examples
+
+1. Get all movies with reviews:
 ```graphql
 query {
-  books {
+  movies {
     id
     title
-    author
-    published
+    director
+    releaseYear
     genre
-    pages
+    duration
+    rating
+    reviews {
+      id
+      reviewer
+      rating
+      comment
+      createdAt
+    }
   }
 }
 ```
 
-2. Get a specific book:
+2. Get top rated movies:
 ```graphql
 query {
-  book(id: "1") {
+  topRatedMovies(limit: 5) {
     title
-    author
-    published
+    director
+    rating
+    reviews {
+      reviewer
+      rating
+    }
   }
 }
-```
 
-3. Create a new book:
+3. Search movies:
+```graphql
+query {
+  searchMovies(query: "shaw") {
+    title
+    director
+    genre
+    rating
+  }
+}
+
+4. Add a movie:
 ```graphql
 mutation {
-  addBook(
-    title: "New Book"
-    author: "Author Name"
-    published: 2023
-    genre: "Fiction"
-    pages: 300
+  addMovie(
+    movie: {
+      title: "New Movie"
+      director: "Director Name"
+      releaseYear: 2023
+      genre: "Action"
+      duration: 120
+      rating: 8.5
+    }
   ) {
     id
     title
-    author
+    director
+  }
+}
+
+5. Add a review:
+```graphql
+mutation {
+  addReview(
+    review: {
+      movieId: "1"
+      rating: 5
+      comment: "Great movie!"
+      reviewer: "John Doe"
+    }
+  ) {
+    id
+    reviewer
+    rating
+    comment
   }
 }
 ```
 
 ## Key GraphQL Concepts Demonstrated
 
-1. **Type System**: Defined schema with Book type
+1. **Type System**: Defined schema with Movie type
 2. **Queries**: Fetching data with specific fields
 3. **Mutations**: Creating new data
 4. **Resolvers**: Business logic implementation
 5. **Query Variables**: Using arguments for filtering
 6. **Data Fetching**: Single endpoint for multiple operations
 
-## Benefits Over REST
 
-1. **Over-fetching Prevention**: Only request what you need
-2. **Under-fetching Prevention**: Get all related data in one request
-3. **Single Endpoint**: No need to maintain multiple endpoints
-4. **Strong Typing**: Better type safety and IDE support
-5. **Documentation**: Built-in schema documentation
-6. **Versioning**: No need for versioning endpoints

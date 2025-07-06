@@ -9,7 +9,10 @@ This workshop is designed to provide a comprehensive, hands-on learning experien
 - History and Evolution of GraphQL
   - Created by Facebook in 2012
   - Open-sourced in 2015
+  - Adoption by major tech companies
+  - Current ecosystem growth
 - What is GraphQL?
+- Comparison with REST
 - Key benefits and use cases
 - GraphQL ecosystem overview
 
@@ -65,32 +68,23 @@ This workshop is designed to provide a comprehensive, hands-on learning experien
 ### Module 9: GraphQL Federation
 - Introduction to GraphQL Federation
   - What is Federation?
-  - Benefits and use cases
-  - Comparison with traditional monolithic APIs
-- Building Federated Services
-  - Creating subgraphs
-  - Implementing shared types
-  - Handling conflicts and overrides
-- Federation Architecture
-  - Gateway setup
-  - Service registration
-  - Query routing
-- Advanced Federation Features
-  - Remote schema stitching
-  - Caching strategies
-  - Performance optimization
-- Best Practices
-  - Schema design patterns
-  - Versioning strategies
-  - Testing federated services
-  - Monitoring and debugging
+  - Benefits of using Federation
+  - Implementing Federation
+  - Best practices for Federation
+  - Common patterns in Federation
+
+## Prerequisites
+- Basic understanding of JavaScript/Node.js
+- Familiarity with REST APIs
+- Basic knowledge of GraphQL concepts (helpful but not required)
+- Git and GitHub account
+- Code editor (VS Code recommended)
 
 ## Learning Outcomes
-By the end of this workshop, participants will be able to:
-- Design and implement GraphQL schemas
+- Understand GraphQL core concepts and benefits
 - Build production-ready GraphQL APIs
-- Optimize queries and performance
-- Implement security best practices
-- Monitor and debug GraphQL applications
-- Understand advanced GraphQL concepts
-- Build and deploy federated GraphQL services
+- Implement advanced GraphQL features
+- Understand GraphQL best practices
+- Build full-stack applications with GraphQL
+- Implement GraphQL Federation
+- Troubleshoot and optimize GraphQL APIs
