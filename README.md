@@ -1,96 +1,139 @@
-# 3-Day GraphQL Hands-On Workshop
+# GraphQL Demo App
 
-## Workshop Overview
-This workshop is designed to provide a comprehensive, hands-on learning experience for GraphQL. Over three days, participants will gain practical experience in building GraphQL APIs, understanding its core concepts, and implementing best practices.
+This demo application showcases the core concepts of GraphQL using a movies database.
 
-## Day 1: GraphQL Fundamentals
+## Setup
 
-### Module 1: Introduction to GraphQL
-- History and Evolution of GraphQL
-  - Created by Facebook in 2012
-  - Open-sourced in 2015
-- What is GraphQL?
-- Key benefits and use cases
-- GraphQL ecosystem overview
+1. Install dependencies:
+```bash
+npm install
+```
 
-### Module 2: GraphQL Core Concepts
-- Schema definition
-- Types and fields
-- Queries and mutations
-  - Using arguments for filtering and pagination
-  - Query variables and dynamic queries
-- Resolvers
-- Error handling
+2. Start the server:
+```bash
+npm start
+```
 
-### Module 3: Building Your First GraphQL API
-- Setting up development environment
-- Creating a basic schema
-- Implementing resolvers
-- Testing with GraphQL Playground
+The server will start on `http://localhost:4000` with GraphiQL interface available at the same URL.
 
-## Day 2: Advanced GraphQL
+## Features Demonstrated
 
-### Module 4: Data Fetching and Optimization
-- Query optimization techniques
-  - Using Aliases for multiple fields
-  - Using Fragments for code reusability
-- Pagination strategies
-- DataLoader implementation
+1. **Data Fetching**
+   - Query movies with nested relationships (reviews)
+   - Filter movies by genre, year, rating
+   - Search movies by title, director, or genre
+   - Paginate results
+   - Sort movies by rating or release year
 
-### Module 5: Authentication and Authorization
-- Implementing JWT
-- Role-based access control
-- Field-level authorization
-- Security best practices
+2. **Mutations**
+   - Add new movies
+   - Update existing movies
+   - Delete movies
+   - Add reviews to movies
+   - Update reviews
+   - Delete reviews
 
-### Module 6: Best Practices in Schema Design
+3. **Schema Features**
+   - Input types for mutations
+   - Type validation
+   - Custom scalars
+   - Aliases and fragments
+   - Error handling
 
-- Designing a scalable schema
-- Using directives for optimizing schema behavior
-- Introduction to schema stitching and modular schemas
+## Query Examples
 
-## Day 3: Full Stack Implementation
+1. Get all movies with reviews:
+```graphql
+query {
+  movies {
+    id
+    title
+    director
+    releaseYear
+    genre
+    duration
+    rating
+    reviews {
+      id
+      reviewer
+      rating
+      comment
+      createdAt
+    }
+  }
+}
+```
 
-### Module 7: Full-Stack Project Implementation 
-- Backend Implementation
-- Frontend Implementation
-- Authentication and Authorization
-- DataLoader Implementation
-- Pagination and Filtering
-- Rate Limiting
-- Error Handling
-- Query Optimization
-- Schema Design
+2. Get top rated movies:
+```graphql
+query {
+  topRatedMovies(limit: 5) {
+    title
+    director
+    rating
+    reviews {
+      reviewer
+      rating
+    }
+  }
+}
 
-### Module 9: GraphQL Federation
-- Introduction to GraphQL Federation
-  - What is Federation?
-  - Benefits and use cases
-  - Comparison with traditional monolithic APIs
-- Building Federated Services
-  - Creating subgraphs
-  - Implementing shared types
-  - Handling conflicts and overrides
-- Federation Architecture
-  - Gateway setup
-  - Service registration
-  - Query routing
-- Advanced Federation Features
-  - Remote schema stitching
-  - Caching strategies
-  - Performance optimization
-- Best Practices
-  - Schema design patterns
-  - Versioning strategies
-  - Testing federated services
-  - Monitoring and debugging
+3. Search movies:
+```graphql
+query {
+  searchMovies(query: "shaw") {
+    title
+    director
+    genre
+    rating
+  }
+}
 
-## Learning Outcomes
-By the end of this workshop, participants will be able to:
-- Design and implement GraphQL schemas
-- Build production-ready GraphQL APIs
-- Optimize queries and performance
-- Implement security best practices
-- Monitor and debug GraphQL applications
-- Understand advanced GraphQL concepts
-- Build and deploy federated GraphQL services
+4. Add a movie:
+```graphql
+mutation {
+  addMovie(
+    movie: {
+      title: "New Movie"
+      director: "Director Name"
+      releaseYear: 2023
+      genre: "Action"
+      duration: 120
+      rating: 8.5
+    }
+  ) {
+    id
+    title
+    director
+  }
+}
+
+5. Add a review:
+```graphql
+mutation {
+  addReview(
+    review: {
+      movieId: "1"
+      rating: 5
+      comment: "Great movie!"
+      reviewer: "John Doe"
+    }
+  ) {
+    id
+    reviewer
+    rating
+    comment
+  }
+}
+```
+
+## Key GraphQL Concepts Demonstrated
+
+1. **Type System**: Defined schema with Movie type
+2. **Queries**: Fetching data with specific fields
+3. **Mutations**: Creating new data
+4. **Resolvers**: Business logic implementation
+5. **Query Variables**: Using arguments for filtering
+6. **Data Fetching**: Single endpoint for multiple operations
+
+
