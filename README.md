@@ -40,6 +40,83 @@ The server will start on `http://localhost:4000` with GraphiQL interface availab
    - Aliases and fragments
    - Error handling
 
+## Authentication
+
+### 1. Register a New User
+```graphql
+mutation {
+  register(email: "user@example.com", password: "password123", name: "Test User") {
+    token
+    user {
+      id
+      email
+      name
+      role
+    }
+  }
+}
+```
+
+### 2. Login
+```graphql
+mutation {
+  login(email: "user@example.com", password: "password123") {
+    token
+    user {
+      id
+      email
+      name
+      role
+    }
+  }
+}
+```
+
+### 3. Using the Token
+
+#### In GraphiQL
+1. After logging in, copy the JWT token from the response
+2. Click the "HTTP HEADERS" button in the GraphiQL interface
+3. Add the following header:
+```json
+{
+  "Authorization": "Bearer <your-token-here>"
+}
+```
+
+#### In a GraphQL Client
+Add the token to the headers of your GraphQL request:
+```javascript
+const headers = {
+  'Authorization': `Bearer ${token}`
+};
+
+// Example using fetch
+fetch('http://localhost:4000/graphql', {
+  method: 'POST',
+  headers: {
+    ...headers,
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    query: `mutation {
+      addMovie(movie: {
+        title: "Test Movie"
+        director: "Test Director"
+        releaseYear: 2023
+        genre: "Action"
+        duration: 120
+        rating: 8.5
+      }) {
+        id
+        title
+        director
+      }
+    }`
+  })
+});
+```
+
 ## Query Examples
 
 1. Get all movies with reviews:

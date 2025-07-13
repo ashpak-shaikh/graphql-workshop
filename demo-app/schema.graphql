@@ -8,6 +8,47 @@ type Movie {
   duration: Int!
   rating: Float!
   reviews: [Review!]!
+  createdBy: User
+  createdAt: String
+  updatedAt: String
+}
+
+type User {
+  id: ID!
+  email: String!
+  name: String!
+  role: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type Query {
+  movies: [Movie!]!
+  movie(id: ID!): Movie
+  moviesByGenre(genre: String!): [Movie!]!
+  moviesByYear(year: Int!): [Movie!]!
+  topRatedMovies(limit: Int = 10): [Movie!]!
+  recentMovies(limit: Int = 10): [Movie!]!
+  searchMovies(query: String!): [Movie!]!
+  me: User
+}
+
+directive @auth(roles: [String!]!) on FIELD_DEFINITION
+
+type Mutation {
+  addMovie(movie: MovieInput!): Movie @auth(roles: ["USER", "ADMIN"])
+  updateMovie(id: ID!, movie: MovieInput!): Movie @auth(roles: ["USER", "ADMIN"])
+  deleteMovie(id: ID!): Boolean @auth(roles: ["ADMIN"])
+  addReview(review: ReviewInput!): Review @auth(roles: ["USER", "ADMIN"])
+  updateReview(id: ID!, review: ReviewInput!): Review @auth(roles: ["USER", "ADMIN"])
+  deleteReview(id: ID!): Boolean @auth(roles: ["USER", "ADMIN"])
+  register(email: String!, password: String!, name: String!): AuthPayload @auth(roles: ["ADMIN"])
+  login(email: String!, password: String!): AuthPayload
 }
 
 # Review type definition
