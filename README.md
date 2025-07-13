@@ -1,56 +1,56 @@
-# GraphQL Demo App
+# GraphQL Workshop
 
-This demo application showcases the core concepts of GraphQL using a movies database.
+This repository contains a comprehensive GraphQL workshop with practical examples and exercises.
 
-## Setup
+## Project Structure
 
-1. Install dependencies:
-```bash
-npm install
-```
+- `demo-app/` - A complete GraphQL movies demo application with:
+  - Apollo Server implementation
+  - Custom scalars and enums
+  - Query and mutation operations
+  - Data modeling with nested types
+  - Error handling and validation
 
-2. Start the server:
-```bash
-npm start
-```
+For detailed setup instructions and usage examples, please refer to the [demo-app README](demo-app/README.md).
 
-The server will start on `http://localhost:4000` with GraphiQL interface available at the same URL.
+## Learning Objectives
 
-## Features Demonstrated
+This workshop covers:
 
-1. **Data Fetching**
-   - Query movies with nested relationships (reviews)
-   - Filter movies by genre, year, rating
-   - Search movies by title, director, or genre
-   - Paginate results
-   - Sort movies by rating or release year
+1. **GraphQL Fundamentals**
+   - Schema design
+   - Type system
+   - Resolvers
+   - Queries and mutations
 
-2. **Mutations**
-   - Add new movies
-   - Update existing movies
-   - Delete movies
-   - Add reviews to movies
-   - Update reviews
-   - Delete reviews
-
-3. **Schema Features**
-   - Input types for mutations
-   - Type validation
+2. **Advanced Concepts**
    - Custom scalars
-   - Aliases and fragments
+   - Enums
+   - Input types
+   - Data validation
    - Error handling
 
-## Query Examples
+3. **Practical Implementation**
+   - Apollo Server setup
+   - Data modeling
+   - API design patterns
+   - Best practices
 
-1. Get all movies with reviews:
-```graphql
-query {
-  movies {
-    id
-    title
-    director
-    releaseYear
-    genre
+## Getting Started
+
+To get started with the workshop:
+
+1. Check out the [demo-app README](demo-app/README.md) for detailed setup instructions
+2. Explore the [demo-app/schema.graphql](demo-app/schema.graphql) to see the GraphQL schema
+3. Run queries in Apollo Studio Explorer using the instructions in the demo-app README
+
+## Contributing
+
+Feel free to submit issues and enhancement requests!
+
+## License
+
+This project is licensed under the MIT License.    genre
     duration
     rating
     reviews {
