@@ -16,13 +16,34 @@ const saveMovies = (movies) => {
 
 // Get all movies
 const getAllMovies = () => {
-  return loadMovies();
+  const movies = loadMovies();
+  // Ensure all movies have timestamps
+  return movies.map(movie => ({
+    ...movie,
+    createdAt: movie.createdAt || new Date().toISOString(),
+    updatedAt: movie.updatedAt || new Date().toISOString()
+  }));
 };
 
 // Get a single movie by ID
 const getMovieById = (id) => {
   const movies = loadMovies();
-  return movies.find(movie => movie.id === id);
+  const movie = movies.find(m => m.id === id);
+  if (!movie) return null;
+  return {
+    ...movie,
+    createdAt: movie.createdAt || new Date().toISOString(),
+    updatedAt: movie.updatedAt || new Date().toISOString()
+  };
+};
+
+// Get movies by language
+const getMoviesByLanguage = (language) => {
+  // Convert language to string and uppercase to match our enum values
+  const upperCaseLanguage = String(language).toUpperCase();
+  const movies = loadMovies();
+  // Always return an array, even if empty
+  return movies.filter(movie => movie.language === upperCaseLanguage) || [];
 };
 
 // Add a new movie
@@ -31,7 +52,9 @@ const addMovie = (movie) => {
   const newMovie = {
     id: (movies.length + 1).toString(),
     ...movie,
-    reviews: []
+    reviews: [],
+    createdAt: movie.createdAt || new Date().toISOString(),
+    updatedAt: movie.updatedAt || new Date().toISOString()
   };
   movies.push(newMovie);
   saveMovies(movies);
@@ -47,7 +70,8 @@ const updateMovie = (id, updates) => {
   }
   movies[movieIndex] = {
     ...movies[movieIndex],
-    ...updates
+    ...updates,
+    updatedAt: new Date().toISOString()
   };
   saveMovies(movies);
   return movies[movieIndex];
@@ -176,5 +200,6 @@ module.exports = {
   filterByYear,
   getTopRated,
   getRecent,
-  searchMovies
+  searchMovies,
+  getMoviesByLanguage
 };

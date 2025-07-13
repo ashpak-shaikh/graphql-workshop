@@ -2,10 +2,33 @@ const { ApolloServer } = require('apollo-server');
 const { ApolloServerPluginLandingPageLocalDefault } = require('apollo-server-core');
 const { getAllMovies, getMovieById, addMovie, updateMovie, deleteMovie,
   addReview, updateReview, deleteReview, filterByGenre, filterByYear,
-  getTopRated, getRecent, searchMovies } = require('./data/movieService');
+  getTopRated, getRecent, searchMovies, getMoviesByLanguage } = require('./data/movieService');
 
 const fs = require('fs');
 const path = require('path');
+
+// Custom scalar types
+const { GraphQLScalarType } = require('graphql');
+const { Kind } = require('graphql/language');
+
+const DateTime = new GraphQLScalarType({
+  name: 'DateTime',
+  description: 'DateTime custom scalar type',
+  parseValue(value) {
+    // Handle both string and Date input
+    return value instanceof Date ? value : new Date(value);
+  },
+  serialize(value) {
+    // Handle both string and Date input
+    return value instanceof Date ? value.toISOString() : new Date(value).toISOString();
+  },
+  parseLiteral(ast) {
+    if (ast.kind === Kind.STRING) {
+      return new Date(ast.value);
+    }
+    return null;
+  }
+});
 
 // Load schema from file
 const typeDefs = fs.readFileSync(
@@ -22,7 +45,8 @@ const resolvers = {
     moviesByYear: (_, { year }) => filterByYear(year),
     topRatedMovies: (_, { limit }) => getTopRated(limit),
     recentMovies: (_, { limit }) => getRecent(limit),
-    searchMovies: (_, { query }) => searchMovies(query)
+    searchMovies: (_, { query }) => searchMovies(query),
+    moviesByLanguage: (_, { language }) => getMoviesByLanguage(language)
   },
   Mutation: {
     addMovie: (_, { movie }) => addMovie(movie),
@@ -39,7 +63,10 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   plugins: [ApolloServerPluginLandingPageLocalDefault()],
-  cors: true
+  cors: true,
+  scalars: {
+    DateTime
+  }
 });
 
 // Start the server

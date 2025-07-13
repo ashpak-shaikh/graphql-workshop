@@ -8,10 +8,13 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
+    "@graphql-tools/graphql-file-loader": "^8.0.20",
+    "@graphql-tools/load": "^8.1.0",
+    "@graphql-tools/schema": "^10.0.23",
     "apollo-server": "^3.10.2",
-    "graphql": "^16.6.0",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "graphql": "^16.6.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"

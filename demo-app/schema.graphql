@@ -1,60 +1,193 @@
-# Movie type definition
-type Movie {
-  id: ID!
+scalar DateTime
+"""
+Custom scalar type for handling date and time values
+"""
+
+enum Role {
+  USER
+  ADMIN
+}
+
+"""
+Enum representing the language of a movie
+"""
+enum Language {
+  """English language movies"""
+  ENGLISH
+  """Hindi language movies"""
+  HINDI
+  """Movies in other languages"""
+  OTHER
+}
+
+"""
+Enum representing different genres of movies
+"""
+enum Genre {
+  """Action-packed movies with high energy"""
+  ACTION
+  """Movies involving exploration and discovery"""
+  ADVENTURE
+  """Animated movies for all ages"""
+  ANIMATION
+  """Movies based on real-life events"""
+  BIOGRAPHY
+  """Movies designed to make you laugh"""
+  COMEDY
+  """Movies about crime and criminals"""
+  CRIME
+  """Non-fiction movies about real events"""
+  DOCUMENTARY
+  """Movies that tell dramatic stories"""
+  DRAMA
+  """Movies about magical and fantastical worlds"""
+  FANTASY
+  """Movies about historical events"""
+  HISTORY
+  """Movies designed to scare"""
+  HORROR
+  """Movies featuring music and dance"""
+  MUSICAL
+  """Mystery and detective stories"""
+  MYSTERY
+  """Romantic stories"""
+  ROMANCE
+  """Science fiction movies about futuristic worlds"""
+  SCIFI
+  """Movies that keep you on the edge of your seat"""
+  THRILLER
+  """Movies about war and conflict"""
+  WAR
+  """Movies set in the American West"""
+  WESTERN
+}
+
+"""
+Input type for creating or updating a movie
+"""
+input MovieInput {
+  """The title of the movie"""
   title: String!
+  """The director of the movie"""
   director: String!
+  """The year the movie was released"""
   releaseYear: Int!
-  genre: String!
+  """The genre of the movie"""
+  genre: Genre!
+  """The duration of the movie in minutes"""
   duration: Int!
+  """The rating of the movie (0-10)"""
   rating: Float!
+  """A description of the movie's plot"""
+  description: String
+  """URL to the movie's cover image"""
+  coverImage: String
+  """The language of the movie"""
+  language: Language!
+}
+
+"""
+Input type for creating or updating a review
+"""
+input ReviewInput {
+  """ID of the movie being reviewed"""
+  movieId: ID!
+  """Rating given by the reviewer (1-10)"""
+  rating: Int!
+  """Optional comment about the movie"""
+  comment: String
+  """Name of the reviewer"""
+  reviewer: String!
+  """When the review was created"""
+  createdAt: DateTime!
+}
+
+"""
+Type representing a movie in the system
+"""
+type Movie {
+  """Unique identifier for the movie"""
+  id: ID!
+  """The title of the movie"""
+  title: String!
+  """The director of the movie"""
+  director: String!
+  """The year the movie was released"""
+  releaseYear: Int!
+  """The genre of the movie"""
+  genre: Genre!
+  """The duration of the movie in minutes"""
+  duration: Int!
+  """The rating of the movie (0-10)"""
+  rating: Float!
+  """A description of the movie's plot"""
+  description: String
+  """URL to the movie's cover image"""
+  coverImage: String
+  """The language of the movie"""
+  language: Language!
+  """When the movie was created"""
+  createdAt: DateTime
+  """When the movie was last updated"""
+  updatedAt: DateTime
+  """Reviews for this movie"""
   reviews: [Review!]!
 }
 
-# Review type definition
+"""
+Type representing a review of a movie
+"""
 type Review {
+  """Unique identifier for the review"""
   id: ID!
+  """ID of the movie being reviewed"""
   movieId: ID!
+  """Rating given by the reviewer (1-10)"""
   rating: Int!
+  """Optional comment about the movie"""
   comment: String
+  """Name of the reviewer"""
   reviewer: String!
-  createdAt: String!
+  """When the review was created"""
+  createdAt: DateTime!
 }
 
-# Input type for creating a movie
-input MovieInput {
-  title: String!
-  director: String!
-  releaseYear: Int!
-  genre: String!
-  duration: Int!
-  rating: Float!
-}
-
-# Input type for creating a review
-input ReviewInput {
-  movieId: ID!
-  rating: Int!
-  comment: String
-  reviewer: String!
-}
-
-# Query type with operations
+"""
+Root query type for all movie-related queries
+"""
 type Query {
+  """Get all movies"""
   movies: [Movie!]!
+  """Get a single movie by ID"""
   movie(id: ID!): Movie
+  """Get movies by language"""
+  moviesByLanguage(language: Language!): [Movie!]!
+  """Get movies by genre"""
   moviesByGenre(genre: String!): [Movie!]!
+  """Get movies by release year"""
   moviesByYear(year: Int!): [Movie!]!
+  """Get top rated movies (defaults to top 10)"""
   topRatedMovies(limit: Int = 10): [Movie!]!
+  """Get recently released movies (defaults to top 10)"""
   recentMovies(limit: Int = 10): [Movie!]!
+  """Search movies by title, director, or genre"""
   searchMovies(query: String!): [Movie!]!
 }
 
-# Mutation type with operations
+"""
+Root mutation type for all movie-related mutations
+"""
 type Mutation {
+  """Add a new movie to the system"""
   addMovie(movie: MovieInput!): Movie
+  """Update an existing movie"""
   updateMovie(id: ID!, movie: MovieInput!): Movie
+  """Delete a movie"""
   deleteMovie(id: ID!): Boolean
+  """Add a review to a movie"""
   addReview(review: ReviewInput!): Review
+  """Update an existing review"""
   updateReview(id: ID!, review: ReviewInput!): Review
+  """Delete a review"""
   deleteReview(id: ID!): Boolean
 }
