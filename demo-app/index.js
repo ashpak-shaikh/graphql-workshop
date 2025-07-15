@@ -1,8 +1,9 @@
 const { ApolloServer } = require('apollo-server');
 const { ApolloServerPluginLandingPageLocalDefault } = require('apollo-server-core');
-const { getAllMovies, getMovieById, addMovie, updateMovie, deleteMovie,
+const { getAllMovies, addMovie, updateMovie, deleteMovie,
   addReview, updateReview, deleteReview, filterByGenre, filterByYear,
   getTopRated, getRecent, searchMovies, getMoviesByLanguage } = require('./data/movieService');
+const movieLoader = require('./data/movieLoader');
 
 const fs = require('fs');
 const path = require('path');
@@ -39,22 +40,64 @@ const typeDefs = fs.readFileSync(
 // Resolvers
 const resolvers = {
   Query: {
-    movies: () => getAllMovies(),
-    movie: (_, { id }) => getMovieById(id),
-    moviesByGenre: (_, { genre }) => filterByGenre(genre),
-    moviesByYear: (_, { year }) => filterByYear(year),
-    topRatedMovies: (_, { limit }) => getTopRated(limit),
-    recentMovies: (_, { limit }) => getRecent(limit),
-    searchMovies: (_, { query }) => searchMovies(query),
-    moviesByLanguage: (_, { language }) => getMoviesByLanguage(language)
+    movies: () => {
+      console.log('Query: Fetching all movies');
+      return getAllMovies();
+    },
+    movie: async (_, { id }) => {
+      console.log(`Query: Fetching movie with id: ${id}`);
+      return await movieLoader.load(id);
+    },
+    moviesByGenre: (_, { genre }) => {
+      console.log(`Query: Fetching movies by genre: ${genre}`);
+      return filterByGenre(genre);
+    },
+    moviesByYear: (_, { year }) => {
+      console.log(`Query: Fetching movies from year: ${year}`);
+      return filterByYear(year);
+    },
+    topRatedMovies: (_, { limit }) => {
+      console.log(`Query: Fetching top rated movies (limit: ${limit || 'default'})`);
+      return getTopRated(limit);
+    },
+    recentMovies: (_, { limit }) => {
+      console.log(`Query: Fetching recent movies (limit: ${limit || 'default'})`);
+      return getRecent(limit);
+    },
+    searchMovies: (_, { query }) => {
+      console.log(`Query: Searching movies for query: ${query}`);
+      return searchMovies(query);
+    },
+    moviesByLanguage: (_, { language }) => {
+      console.log(`Query: Fetching movies by language: ${language}`);
+      return getMoviesByLanguage(language);
+    }
   },
   Mutation: {
-    addMovie: (_, { movie }) => addMovie(movie),
-    updateMovie: (_, { id, movie }) => updateMovie(id, movie),
-    deleteMovie: (_, { id }) => deleteMovie(id),
-    addReview: (_, { review }) => addReview(review),
-    updateReview: (_, { id, review }) => updateReview(id, review),
-    deleteReview: (_, { id }) => deleteReview(id)
+    addMovie: (_, { movie }) => {
+      console.log('Mutation: Adding new movie:', movie.title);
+      return addMovie(movie);
+    },
+    updateMovie: (_, { id, movie }) => {
+      console.log(`Mutation: Updating movie with id: ${id}`, movie.title);
+      return updateMovie(id, movie);
+    },
+    deleteMovie: (_, { id }) => {
+      console.log(`Mutation: Deleting movie with id: ${id}`);
+      return deleteMovie(id);
+    },
+    addReview: (_, { review }) => {
+      console.log(`Mutation: Adding review for movie: ${review.movieId}`);
+      return addReview(review);
+    },
+    updateReview: (_, { id, review }) => {
+      console.log(`Mutation: Updating review with id: ${id}`);
+      return updateReview(id, review);
+    },
+    deleteReview: (_, { id }) => {
+      console.log(`Mutation: Deleting review with id: ${id}`);
+      return deleteReview(id);
+    }
   }
 };
 

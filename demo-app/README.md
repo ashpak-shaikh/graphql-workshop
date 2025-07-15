@@ -36,7 +36,40 @@ Once the server is running, you can access the Apollo Studio Explorer at http://
 - **Local Explorer**: http://localhost:4000
 - **Apollo Studio**: https://studio.apollographql.com/sandbox/explorer
 
-This provides a powerful interface for:
+### Data Loading Optimization with DataLoader
+
+This application demonstrates the use of DataLoader for efficient data loading. DataLoader helps reduce the number of database queries by batching and caching requests.
+
+For example, consider this GraphQL query that fetches multiple movies using aliases:
+
+```graphql
+{
+  movie1: movie(id: "1") {
+    title
+    director
+  }
+  movie2: movie(id: "2") {
+    title
+    director
+  }
+  movie3: movie(id: "3") {
+    title
+    director
+  }
+}
+```
+
+Without DataLoader, this would make 3 separate database calls. With DataLoader, it batches these into a single call. You can verify this by checking the server console output:
+
+```
+Batch loading movies for IDs: 1, 2, 3
+Loading movie with id: 1
+Loading movie with id: 2
+Loading movie with id: 3
+Batch loaded 3 movies
+```
+
+### Example Queries
 
 1. **Querying Data**:
 ```graphql
