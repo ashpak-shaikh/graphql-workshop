@@ -119,8 +119,8 @@
     "rating": 8.9,
     "coverImage": "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_UY1200_CR90,0,630,1200_AL_.jpg",
     "language": "ENGLISH",
-    "createdAt": "2025-07-13T21:09:32.000Z",
-    "updatedAt": "2025-07-13T21:09:32.000Z",
+    "createdAt": "2025-07-14T02:17:29.000Z",
+    "updatedAt": "2025-07-14T02:17:29.000Z",
     "reviews": []
   },
   {
@@ -133,8 +133,8 @@
     "rating": 8.8,
     "coverImage": "https://m.media-amazon.com/images/M/MV5BMWU4N2FjZGEtNjkwNC00ZjAxLTg5ZmUtOWRkZTBmMDJjNGZlXkEyXkFqcGdeQXVyNjUwMzI2NzU@._V1_UY1200_CR90,0,630,1200_AL_.jpg",
     "language": "ENGLISH",
-    "createdAt": "2025-07-13T21:09:32.000Z",
-    "updatedAt": "2025-07-13T21:09:32.000Z",
+    "createdAt": "2025-07-14T02:17:29.000Z",
+    "updatedAt": "2025-07-14T02:17:29.000Z",
     "reviews": []
   },
   {
@@ -243,8 +243,10 @@
     "genre": "SPORT",
     "duration": 161,
     "rating": 8.4,
-    "coverImage": "https://m.media-amazon.com/images/M/MV5BMjE5NjI1NjUyMV5BMl5BanBnXkFtZTgwNjI2NjY2MDI@._V1_UY1200_CR90,0,630,1200_AL_.jpg",
+    "coverImage": "https://m.media-amazon.com/images/M/MV5BMjE1NjYyMjY2N15BMl5BanBnXkFtZTgwNjI2NjY2MDI@._V1_UY1200_CR90,0,630,1200_AL_.jpg",
     "language": "HINDI",
+    "createdAt": "2025-07-14T02:23:17.000Z",
+    "updatedAt": "2025-07-14T02:23:17.000Z",
     "reviews": []
   },
   {
@@ -257,6 +259,8 @@
     "rating": 8.1,
     "coverImage": "https://m.media-amazon.com/images/M/MV5BMjE1NjYyMjY2N15BMl5BanBnXkFtZTgwMjIyNjY2MDE@._V1_UY1200_CR90,0,630,1200_AL_.jpg",
     "language": "HINDI",
+    "createdAt": "2025-07-14T02:23:17.000Z",
+    "updatedAt": "2025-07-14T02:23:17.000Z",
     "reviews": []
   },
   {
@@ -269,11 +273,15 @@
     "rating": 8.4,
     "coverImage": "https://m.media-amazon.com/images/M/MV5BMTc3NzQ1MjQyMV5BMl5BanBnXkFtZTcwMjQ4NjUyMQ@@._V1_UY1200_CR90,0,630,1200_AL_.jpg",
     "language": "HINDI",
+    "createdAt": "2025-07-14T02:23:17.000Z",
+    "updatedAt": "2025-07-14T02:23:17.000Z",
     "reviews": []
   },
   {
     "id": "20",
     "title": "Zindagi Na Milegi Dobara",
+    "createdAt": "2025-07-14T02:17:29.000Z",
+    "updatedAt": "2025-07-14T02:17:29.000Z",
     "director": "Zoya Akhtar",
     "releaseYear": 2011,
     "genre": "DRAMA",
@@ -293,6 +301,8 @@
     "rating": 8.2,
     "coverImage": "https://m.media-amazon.com/images/M/MV5BMTYyNzIyNzE1M15BMl5BanBnXkFtZTcwODQyODIyNw@@._V1_UY1200_CR90,0,630,1200_AL_.jpg",
     "language": "HINDI",
+    "createdAt": "2025-07-14T02:23:17.000Z",
+    "updatedAt": "2025-07-14T02:23:17.000Z",
     "reviews": []
   },
   {
@@ -317,8 +327,10 @@
     "genre": "DRAMA",
     "duration": 158,
     "rating": 8.1,
-    "coverImage": "https://m.media-amazon.com/images/M/MV5BMTYyNzIyNzE1M15BMl5BanBnXkFtZTcwODQyODIyNw@@._V1_UY1200_CR90,0,630,1200_AL_.jpg",
+    "coverImage": "https://m.media-amazon.com/images/M/MV5BMTYxMjQyNjY3Ml5BMl5BanBnXkFtZTcwODQyODIyNw@@._V1_UY1200_CR90,0,630,1200_AL_.jpg",
     "language": "HINDI",
+    "createdAt": "2025-07-14T02:23:17.000Z",
+    "updatedAt": "2025-07-14T02:23:17.000Z",
     "reviews": []
   },
   {
@@ -329,8 +341,10 @@
     "genre": "COMEDY",
     "duration": 155,
     "rating": 8.1,
-    "coverImage": "https://m.media-amazon.com/images/M/MV5BMjE4MDI4MzY5Ml5BMl5BanBnXkFtZTcwMjQwMjYyMQ@@._V1_UY1200_CR90,0,630,1200_AL_.jpg",
+    "coverImage": "https://m.media-amazon.com/images/M/MV5BMTYxMjQyNjY3Ml5BMl5BanBnXkFtZTcwODQyODIyNw@@._V1_UY1200_CR90,0,630,1200_AL_.jpg",
     "language": "HINDI",
+    "createdAt": "2025-07-14T02:23:17.000Z",
+    "updatedAt": "2025-07-14T02:23:17.000Z",
     "reviews": []
   },
   {
@@ -341,8 +355,10 @@
     "genre": "DRAMA",
     "duration": 147,
     "rating": 8.1,
-    "coverImage": "https://m.media-amazon.com/images/M/MV5BMTYyNzIyNzE1M15BMl5BanBnXkFtZTcwODQyODIyNw@@._V1_UY1200_CR90,0,630,1200_AL_.jpg",
+    "coverImage": "https://m.media-amazon.com/images/M/MV5BMTYxMjQyNjY3Ml5BMl5BanBnXkFtZTcwODQyODIyNw@@._V1_UY1200_CR90,0,630,1200_AL_.jpg",
     "language": "HINDI",
+    "createdAt": "2025-07-14T02:23:17.000Z",
+    "updatedAt": "2025-07-14T02:23:17.000Z",
     "reviews": []
   }
 ]
